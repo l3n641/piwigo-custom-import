@@ -59,6 +59,9 @@ class DB
         if ($name === null) {
             $name = $dir_name;
         }
+        if (empty($id_uppercat)) {
+            $id_uppercat = "null";
+        }
 
         $create_sql = "insert into %s (name,dir,site_id,id_uppercat) values('%s','%s','%d',%s)";
         $query = sprintf($create_sql, CATEGORIES_TABLE, $name, $dir_name, $site_id, $id_uppercat);

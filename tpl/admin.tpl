@@ -37,11 +37,14 @@
                 <div><label for="galleries_url">图片根目录:</label>
                     <input name="galleries_url" id="galleries_url" value="./galleries/">
                 </div>
+                <div><label for="main_album">把根目录作为主相册:</label>
+                    <input type="checkbox" id="main_album" name="main_album" value="1"/>
+                </div>
                 <div>
                     <label for="file-upload">Choose a file:</label>
                     <input type="file" id="file-upload" name="file" accept=".json, text">
-                    <button type="submit">Upload</button>
                 </div>
+                <button type="submit">提交</button>
             </form>
         </div>
     {/if}

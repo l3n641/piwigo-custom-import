@@ -25,7 +25,7 @@ if (!is_dir($galleries_url)) {
 
 
 $import = new Import($file, $galleries_url);
-$result = $import->run();
+$result = $import->run(!empty($_POST["main_album"]));
 $template->assign('result', $result);
 $template->set_filename('plugin_admin_content', dirname(__FILE__) . '/tpl/admin.tpl');
 $template->assign_var_from_handle('ADMIN_CONTENT', 'plugin_admin_content');

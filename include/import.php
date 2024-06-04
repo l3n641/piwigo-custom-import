@@ -95,10 +95,12 @@ class Import
     }
 
 
-    public function run()
+    public function run($is_set_main_alum)
     {
-
-        $main_albums_id = $this->get_main_album_id();
+        $main_albums_id = "";
+        if ($is_set_main_alum) {
+            $main_albums_id = $this->get_main_album_id();
+        }
 
         $products = $this->read_json();
         $success_quantity = 0;
@@ -110,8 +112,12 @@ class Import
                 continue;
             }
             $category_album_id = $this->save_category_album($product->get_tag(), $main_albums_id,);
-
-            $product_album_id = $this->save_product_album($sku, $key, $category_album_id, "$main_albums_id,$category_album_id");
+            if ($is_set_main_alum) {
+                $uppercats = "$main_albums_id,$category_album_id";
+            }else{
+                $uppercats = "$category_album_id";
+            }
+            $product_album_id = $this->save_product_album($sku, $key, $category_album_id, $uppercats);
 
             $representative_picture_id = 0;
             foreach ($product->get_product_gallery() as $path) {

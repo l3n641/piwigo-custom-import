@@ -12,7 +12,7 @@ class Product
     private function get_meta_data($key)
     {
         if (!empty($this->meta[$key])) {
-            return $this->meta[$key];
+            return $this->removeEmojis($this->meta[$key]);
         }
         return "";
     }
@@ -51,5 +51,11 @@ class Product
         return $this->get_meta_data("tag_name");
     }
 
+    function removeEmojis($text)
+    {
+        $regex = '/[\x{10000}-\x{10FFFF}]/u'; // 表情符号 Unicode 范围
+        $text = preg_replace($regex, '', $text);
+        return $text;
+    }
 
 }

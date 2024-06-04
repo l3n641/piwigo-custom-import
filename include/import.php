@@ -114,17 +114,18 @@ class Import
             $category_album_id = $this->save_category_album($product->get_tag(), $main_albums_id,);
             if ($is_set_main_alum) {
                 $uppercats = "$main_albums_id,$category_album_id";
-            }else{
+            } else {
                 $uppercats = "$category_album_id";
             }
             $product_album_id = $this->save_product_album($sku, $key, $category_album_id, $uppercats);
 
             $representative_picture_id = 0;
+            $title = pwg_db_real_escape_string($product->get_post_title());
             foreach ($product->get_product_gallery() as $path) {
                 $base_dir = dirname($this->galleries_url);
 
                 $image_path = $base_dir . "/" . $path;
-                $image_id = DB::sava_image($image_path, $product_album_id, $sku, $product->get_post_title());
+                $image_id = DB::sava_image($image_path, $product_album_id, $sku, $title);
                 if (!$representative_picture_id) {
                     $representative_picture_id = $image_id;
                 }
